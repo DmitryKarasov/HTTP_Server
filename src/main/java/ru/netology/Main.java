@@ -7,11 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 
-
 public class Main {
     public static void main(String[] args) {
 
-        Server server = Server.getInstance();
+       Server server = Server.getInstance();
 
         server.addHandler("GET", "/classic.html", (request, responseStream) -> {
             try {
@@ -59,7 +58,6 @@ public class Main {
         });
 
         server.listen(9999);
-
     }
 }
 

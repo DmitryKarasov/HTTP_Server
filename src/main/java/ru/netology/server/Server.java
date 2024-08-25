@@ -1,9 +1,9 @@
 package ru.netology.server;
 
 import ru.netology.handlers.Handler;
-import ru.netology.handlers.Request;
-import ru.netology.handlers.RequestMethod;
-import ru.netology.handlers.RequestParser;
+import ru.netology.requests.Request;
+import ru.netology.requests.RequestMethod;
+import ru.netology.utils.RequestParser;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -75,12 +75,14 @@ public class Server {
     }
 
     public void addHandler(String requestMethod, String url, Handler handler) {
+        var urlWithoutParams = url.split("\\?")[0];
+
         if (RequestMethod.isMethod(requestMethod)) {
             if (handlers.containsKey(RequestMethod.valueOf(requestMethod))) {
-                handlers.get(RequestMethod.valueOf(requestMethod)).put(url, handler);
+                handlers.get(RequestMethod.valueOf(requestMethod)).put(urlWithoutParams, handler);
             } else {
                 ConcurrentMap<String, Handler> handlersMap = new ConcurrentHashMap<>();
-                handlersMap.put(url, handler);
+                handlersMap.put(urlWithoutParams, handler);
                 handlers.put(RequestMethod.valueOf(requestMethod), handlersMap);
             }
         }
@@ -88,10 +90,12 @@ public class Server {
 
     private void sendBadRequestStatus(BufferedOutputStream out) throws IOException {
         out.write((
-                "HTTP/1.1 404 Not Found\r\n" +
-                        "Content-Length: 0\r\n" +
-                        "Connection: close\r\n" +
-                        "\r\n"
+                """
+                    HTTP/1.1 404 Not Found\r
+                    Content-Length: 0\r
+                    Connection: close\r
+                    \r
+                    """
         ).getBytes());
         out.flush();
     }

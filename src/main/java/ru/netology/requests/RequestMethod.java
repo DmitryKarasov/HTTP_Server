@@ -1,13 +1,13 @@
-package ru.netology.handlers;
+package ru.netology.requests;
 
 import java.util.Arrays;
 
 public enum RequestMethod {
     GET,
-    PUT,
-    POST,
-    PATCH,
-    DELETE;
+//    PUT,
+    POST;
+//    PATCH,
+//    DELETE;
 
     public static boolean isMethod(String stringMethod) {
         return Arrays.stream(RequestMethod.values())
