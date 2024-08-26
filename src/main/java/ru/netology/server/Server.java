@@ -91,11 +91,11 @@ public class Server {
     private void sendBadRequestStatus(BufferedOutputStream out) throws IOException {
         out.write((
                 """
-                    HTTP/1.1 404 Not Found\r
-                    Content-Length: 0\r
-                    Connection: close\r
-                    \r
-                    """
+                        HTTP/1.1 404 Not Found\r
+                        Content-Length: 0\r
+                        Connection: close\r
+                        \r
+                        """
         ).getBytes());
         out.flush();
     }

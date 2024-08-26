@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum RequestMethod {
     GET,
-//    PUT,
+    //    PUT,
     POST;
 //    PATCH,
 //    DELETE;
